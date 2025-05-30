@@ -32,12 +32,6 @@ class Sstring{
             length = i;
         }
 
-        void enter_str()
-        {
-            cin >> content;
-            length = sizeof(content);
-        }
-
         void display()
         {
             cout << "Content: " << content << nl << "Length: " << length << nl;
@@ -75,14 +69,13 @@ class Sstring{
             length++;
         }
 
-        void concat(const char *x)
+        void concat(Sstring sstr)
         {
             int i;
-            for(i = length; x[i - length] != '\0'; i++) {
-                content[i] = x[i-length];
+            for(i = 0; i <= sstr.length; i++) {
+                content[i + length] = sstr.content[i];
             }
-            content[i] = '\0';
-            length = i;
+            length += sstr.length;
         }
 
         void to_upper_case()
@@ -148,7 +141,6 @@ class Bin: public Sstring{
 
             }
             content[length] = '\0';
-
         }        
 
         void invert()
@@ -348,7 +340,8 @@ void handleSstringMenu(Sstring& sstr)
                 char str[20];
                 cout << "Введите строку для объединения: ";
                 cin >> str;
-                sstr.concat(str);
+                Sstring s2(str);
+                sstr.concat(s2);
                 break;
             }
             case 7:
